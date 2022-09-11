@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://SpaceAssetsGodot/Examples/Shader/Shader1_normal.gdshader" type="Shader" id=1]
+[ext_resource path="res://SpaceAssetsGodot/Examples/Shader/Shader0_constant.gdshader" type="Shader" id=1]
 
 [sub_resource type="CubeMesh" id=1]
 
