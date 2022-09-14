@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=7 format=2]
+
+[ext_resource path="res://SpaceAssetsGodot/Ground/BiomePainting/AlaskaNormals.jpg" type="Texture" id=1]
+[ext_resource path="res://SpaceAssetsGodot/Ground/sandy_tiled.jpg" type="Texture" id=2]
+[ext_resource path="res://SpaceAssetsGodot/Ground/BiomePainting/BiomePainting.gdshader" type="Shader" id=3]
+[ext_resource path="res://SpaceAssetsGodot/Ground/BiomePainting/AlaskaBiomes.jpg" type="Texture" id=4]
+[ext_resource path="res://SpaceAssetsGodot/Ground/pebbles_loose_tiled.jpg" type="Texture" id=5]
+[ext_resource path="res://SpaceAssetsGodot/Ground/BiomePainting/AlaskaElevation.jpg" type="Texture" id=6]
+
+[resource]
+shader = ExtResource( 3 )
+shader_param/elevationScale = 10.0
+shader_param/elevationTexture = ExtResource( 6 )
+shader_param/rockTexture = ExtResource( 5 )
+shader_param/treeTexture = ExtResource( 2 )
+shader_param/normalTexture = ExtResource( 1 )
+shader_param/biomeTexture = ExtResource( 4 )
