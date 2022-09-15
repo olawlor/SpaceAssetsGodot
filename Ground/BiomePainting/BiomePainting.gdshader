@@ -4,7 +4,7 @@ shader_type spatial;
 varying vec2 groundTC;  // texture coordinates on ground
 varying float elevation; // height in meters off ground
 uniform sampler2D elevationTexture;
-uniform float elevationScale=10.0; //< 0-1 color to actual Y meters
+uniform float elevationScale=6.2; //< 0-1 color to actual Y meters (Denali==1.0)
 void vertex() {
 	groundTC = UV.xy;
 	elevation = elevationScale*texture(elevationTexture,groundTC).r;
@@ -26,31 +26,45 @@ void fragment()
 	normal = vec3(normal.x,normal.z,-normal.y); //<- swizzle to swap Z-up to Y-up
 	NORMAL = (INV_CAMERA_MATRIX*vec4(normal,0.0)).xyz; // world to view coords
 	
-	// Detail map the ground
-	vec2 tc = groundTC; // texture coordinates on model
-	
-	// Multi-octive noise
-	vec2 tc1 = 8.0*tc;
-	vec3 rockCoarse = texture(rockTexture,tc1).rgb;
-	vec3 treeCoarse = texture(treeTexture,tc1).rgb;
-	
-	vec2 tc2 = 128.0*tc;
-	vec3 rockDetail = texture(rockTexture,tc2).rgb;
-	vec3 treeDetail = texture(treeTexture,tc2).rgb;
-	
-	vec3 rock = (rockCoarse+0.5)*(rockDetail+0.1); // grey rocks
-	vec3 tree = (treeCoarse+0.4)*treeDetail; // contrasty trees
-	vec3 water = vec3(0.1,0.2,0.4); // dim blue water
-	vec3 snow = vec3(1,1,1); // snow
-	
 	// red: rock (bare gravel), green: trees (vegetation), blue: 
 	vec3 biome = texture(biomeTexture,groundTC).rgb;
 	
-	ALBEDO = 0.5*vec3(1,1,1); // flat shaded
-	ALBEDO = rock;  // rock debug
-	ALBEDO = biome.r*rock + biome.g*biome*tree + biome.b*water;
+	// Detail map the ground
+	vec2 tc = groundTC; // texture coordinates on model
 	
-	float snowline = 5.0;
-	if (elevation>snowline) ALBEDO=mix(ALBEDO,snow,clamp(elevation-snowline,0,1));
+	// Rocks and trees from multi-octive noise: coarse and fine detail textures
+	vec3 rockCoarse = texture(rockTexture,512.0*groundTC).rgb;
+	vec3 treeCoarse = texture(treeTexture,64.0*groundTC).rgb;
 	
+	vec3 rockDetail = texture(rockTexture,2048.0*groundTC).rgb;
+	vec3 treeDetail = texture(treeTexture,512.0*groundTC).rgb;
+	
+	vec3 rock = (rockCoarse+0.5)*(rockDetail+0.1); // grey rocks
+	vec3 tree = (treeCoarse+0.4)*treeDetail; // contrasty trees
+	tree *= biome; // tint trees to the color of the satellite image
+	
+	// Ocean with gentle waves
+	vec3 oceanColor = vec3(0,0.1,0.3);
+	float waveTop = pow(abs(sin(groundTC.x*1000.0+0.1*TIME+5.0*sin(groundTC.y*100.0))),32.0);
+	oceanColor = mix(oceanColor,vec3(1,1,1),0.1*waveTop);
+	float oceanFraction = pow(biome.b,4.0);
+	
+	// Snow-capped peaks
+	vec3 snow = vec3(1,1,1); // snow color
+	float snowFraction = 0.0;
+	float snowline = 3.0; // altitude where snow starts (km)
+	if (elevation>snowline) {
+		snowFraction = clamp(0.5*(elevation-snowline),0,0.7);
+	}
+	
+	// Mix together all these effects:
+	ALBEDO = mix(
+		mix(
+			mix(rock,tree,biome.g),
+			oceanColor,oceanFraction
+		),
+		snow,snowFraction
+	);
+	
+	// ALBEDO = 0.5*vec3(1,1,1); // flat shaded	
 }

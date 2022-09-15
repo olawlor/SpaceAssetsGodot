@@ -10,8 +10,8 @@
 
 [sub_resource type="PlaneMesh" id=4]
 size = Vector2( 1000, 1000 )
-subdivide_width = 500
-subdivide_depth = 500
+subdivide_width = 2000
+subdivide_depth = 2000
 
 [sub_resource type="ProceduralSky" id=9]
 
@@ -35,14 +35,17 @@ mesh = SubResource( 6 )
 material/0 = ExtResource( 3 )
 
 [node name="Ground" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.41993, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.78535, 0 )
 cast_shadow = 0
 mesh = SubResource( 4 )
 material/0 = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Sun Light" type="DirectionalLight" parent="."]
-transform = Transform( 0.92988, -0.344677, -0.128531, 0.367105, 0.847081, 0.384302, -0.023584, -0.40454, 0.914216, 0, 16.2518, -1.03648 )
-light_energy = 2.0
+transform = Transform( 0.980659, -0.145876, -0.130492, 0.184019, 0.914292, 0.360841, 0.0666703, -0.377875, 0.923453, -8.28647, 13.3813, -1.03848 )
+light_energy = 1.5
 shadow_enabled = true
 shadow_bias = 0.01
 
