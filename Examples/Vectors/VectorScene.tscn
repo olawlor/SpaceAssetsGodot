@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://SpaceAssetsGodot/Examples/Vectors/VectorShader.gdshader" type="Shader" id=1]
 [ext_resource path="res://SpaceAssetsGodot/Examples/Rotation/KeyboardMouseLook.gd" type="Script" id=2]
@@ -38,6 +38,10 @@ shader_param/axis = Plane( 0, 1, 0, 0 )
 shader = ExtResource( 1 )
 shader_param/axis = Plane( 0, 0, 1, 0 )
 
+[sub_resource type="ShaderMaterial" id=15]
+shader = ExtResource( 1 )
+shader_param/axis = Plane( 0.5, 0.5, 0.5, 1 )
+
 [node name="Spatial" type="Spatial"]
 
 [node name="Sphere" type="MeshInstance" parent="."]
@@ -74,5 +78,6 @@ environment = SubResource( 10 )
 material/0 = SubResource( 12 )
 material/1 = SubResource( 13 )
 material/2 = SubResource( 14 )
+material/3 = SubResource( 15 )
 
 [editable path="VectorShader on Axes3DX"]
