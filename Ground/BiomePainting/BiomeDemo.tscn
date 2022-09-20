@@ -10,8 +10,8 @@
 
 [sub_resource type="PlaneMesh" id=4]
 size = Vector2( 1000, 1000 )
-subdivide_width = 2000
-subdivide_depth = 2000
+subdivide_width = 1000
+subdivide_depth = 1000
 
 [sub_resource type="ProceduralSky" id=9]
 
