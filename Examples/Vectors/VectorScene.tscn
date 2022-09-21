@@ -45,7 +45,7 @@ shader_param/axis = Plane( 0.5, 0.5, 0.5, 1 )
 [node name="Spatial" type="Spatial"]
 
 [node name="Sphere" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.52954 )
+transform = Transform( 0.805928, -0.232782, 0.544327, 0, 0.919451, 0.393204, -0.592013, -0.316894, 0.741012, -0.639933, -0.296525, -3.28152 )
 mesh = SubResource( 6 )
 
 [node name="Ground" type="MeshInstance" parent="."]
