@@ -88,7 +88,7 @@ bool ray_plane_intersection(vec3 C,vec3 D, float max_t, inout Hit hit)
 	
 	vec3 world = C + tPlane*D;
 	float radius = length(world);
-	float maxRadius=2.5; // radius of rings relative to Saturn
+	float maxRadius=2.32; // radius of F ring relative to Saturn
 	if (radius>maxRadius) return false; 
 	
 	hit.position = world;
