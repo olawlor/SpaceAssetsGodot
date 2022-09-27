@@ -47,11 +47,11 @@ void fragment()
 	float lighting = dot(toLight, worldNormal);
 	if (lighting<0.0) lighting=0.0; // facing away from camera
 	else {
-	    // Facing the light, add specular
-	    vec3 toCamera = normalize(camera - worldHit);
-	    vec3 halfway = normalize(toCamera + toLight); // Blinn's "halfway vector"
-	    float phongExponent = 100.0; // Phong's (hacky) exponent for specular reflection
-	    specular = pow(dot(worldNormal,halfway),phongExponent);
+		// Facing the light, add specular
+		vec3 toCamera = normalize(camera - worldHit);
+		vec3 halfway = normalize(toCamera + toLight); // Blinn's "halfway vector"
+		float phongExponent = 100.0; // Phong's (hacky) exponent for specular reflection
+		specular = pow(dot(worldNormal,halfway),phongExponent);
 	}
 	lighting += 0.1; // approximate ambient lighting (sky/floor/etc)
 	vec3 diffuse = ALBEDO * lighting; // diffuse lighting
