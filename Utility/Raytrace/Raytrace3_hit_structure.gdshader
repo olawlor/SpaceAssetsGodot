@@ -63,7 +63,7 @@ bool ray_sphere_intersection(vec3 C,vec3 D,float max_t,inout Hit hit)
 	hit.t=t;
 	hit.position = C+t*D;
 	hit.normal = normalize(hit.position);
-	hit.uv=vec2(0.3*abs(hit.position.y),0.99); // vertical axis colors
+	hit.uv=vec2(0.01,1.0-abs(hit.position.y)); // vertical axis colors
 	hit.alpha=1.0;
 	return true;
 }
