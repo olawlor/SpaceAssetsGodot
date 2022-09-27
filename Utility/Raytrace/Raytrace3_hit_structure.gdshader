@@ -63,7 +63,7 @@ bool ray_sphere_intersection(vec3 C,vec3 D,float max_t,inout Hit hit)
 	hit.t=t;
 	hit.position = C+t*D;
 	hit.normal = normalize(hit.position);
-	hit.uv=vec2(0.3*hit.position.y,0.0);
+	hit.uv=vec2(0.3*abs(hit.position.y),0.99); // vertical axis colors
 	hit.alpha=1.0;
 	return true;
 }
@@ -94,8 +94,8 @@ bool ray_plane_intersection(vec3 C,vec3 D, float max_t, inout Hit hit)
 	hit.position = world;
 	hit.t=tPlane;
 	hit.normal=N;
-	hit.uv=vec2(radius/maxRadius,0.0);
-	hit.alpha = clamp(texture(ringsTexture,hit.uv).r*2.0,0.0,1.0);
+	hit.uv=vec2(radius/maxRadius,0.99);
+	hit.alpha = clamp(texture(ringsTexture,hit.uv).r*1.2,0.0,1.0);
 	return true;
 }
 
@@ -128,9 +128,9 @@ void fragment()
 	vec4 ring = texture(ringsTexture,hit.uv);
 	vec3 albedo = ring.rgb;
 	
-	vec3 toLight=normalize(vec3(0,1,0.8));
+	vec3 toLight=normalize(vec3(0,0.4,1.0));
 	Hit shadowHit;
-	float light=0.1; // ambient
+	float light=0.2; // ambient
 	if (!ray_world_intersection(hit.position+0.0001*hit.normal,toLight,1.0e9,shadowHit))
 	{
 		light += 1.3*clamp(dot(worldNormal,toLight),0.0,1.0);
