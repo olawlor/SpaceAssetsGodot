@@ -1,8 +1,8 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://SpaceAssetsGodot/Examples/Rotation/KeyboardMouseLook.gd" type="Script" id=1]
 [ext_resource path="res://SpaceAssetsGodot/Ground/GroundTexture.gdshader" type="Shader" id=2]
-[ext_resource path="res://SpaceAssetsGodot/Utility/Raytrace/Raytrace3_hit_structure.gdshader" type="Shader" id=3]
+[ext_resource path="res://SpaceAssetsGodot/Utility/Raytrace/Raytrace5_soft_shadows.gdshader" type="Shader" id=3]
 [ext_resource path="res://SpaceAssetsGodot/Ground/pebbles_loose_tiled.jpg" type="Texture" id=4]
 [ext_resource path="res://SpaceAssetsGodot/Planets/Saturn/saturn_rings_hubble.png" type="Texture" id=5]
 
@@ -27,13 +27,17 @@ shader_param/groundTexture = ExtResource( 4 )
 [sub_resource type="ProceduralSky" id=9]
 
 [sub_resource type="Environment" id=10]
-background_mode = 2
+background_mode = 1
 background_sky = SubResource( 9 )
 ambient_light_energy = 0.2
 
 [sub_resource type="SphereMesh" id=14]
 radial_segments = 32
 rings = 16
+
+[sub_resource type="SpatialMaterial" id=16]
+metallic = 1.0
+metallic_specular = 1.0
 
 [sub_resource type="CubeMesh" id=15]
 
@@ -54,7 +58,7 @@ __meta__ = {
 }
 
 [node name="Sun Light" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.906307, 0.422618, 0, -0.422618, 0.906307, -8.28647, 13.3813, -1.03848 )
+transform = Transform( 1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, -8.15588, 13.4372, -1.08784 )
 shadow_enabled = true
 shadow_bias = 0.01
 
@@ -70,8 +74,13 @@ environment = SubResource( 10 )
 [node name="PolygonSphere" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.45538, 0, 0 )
 mesh = SubResource( 14 )
+material/0 = SubResource( 16 )
 
 [node name="CubeIntersection" type="MeshInstance" parent="."]
 transform = Transform( 0.575331, 0, 0, 0, 0.496535, 0, 0, 0, 1, 0, 0, 0.157862 )
 visible = false
 mesh = SubResource( 15 )
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.41953, 0.0371473, 0.0744449 )
+max_distance = 37.2
