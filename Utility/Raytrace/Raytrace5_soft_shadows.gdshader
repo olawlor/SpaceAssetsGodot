@@ -198,8 +198,12 @@ void fragment()
 		vec4 nextColor;
 		if (color_along_ray(hit.position,D,hit,nextColor))
 		{
-			worldColor.rgb = mix(nextColor.rgb,worldColor.rgb,worldColor.a);
-			worldColor.a += (1.0-worldColor.a)*nextColor.a;
+			// Alpha blend next and previous colors using OVER blending:
+			//   https://en.wikipedia.org/wiki/Alpha_compositing
+			float a0 = worldColor.a + nextColor.a*(1.0-worldColor.a);
+			worldColor.rgb = nextColor.rgb*nextColor.a*(1.0-worldColor.a)/a0
+							+ worldColor.rgb*worldColor.a/a0;
+			worldColor.a = a0;
 		}
 	}
 	
