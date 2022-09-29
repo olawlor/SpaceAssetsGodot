@@ -2,7 +2,7 @@
   Raytracing demo 5: soft shadows from sphere
 */
 shader_type spatial;
-render_mode cull_disabled; //<- keep both sides of proxy geometry
+render_mode cull_front; //<- keep only the back side of our proxy geometry
 render_mode unshaded; //<- turn off Godot lighting
 
 // Ray through world
@@ -33,7 +33,7 @@ const float min_t=0.0001; //<- t that counts as an intersection
  	sphere.xyz is origin
 	sphere.w is radius
 */
-bool ray_sphere_intersection(const vec4 sphere,vec3 Cworld,vec3 D,float max_t,inout Hit hit)
+bool ray_sphere_intersection(const vec4 sphere,float uvX,vec3 Cworld,vec3 D,float max_t,inout Hit hit)
 {
 	vec3 C=Cworld - sphere.xyz; // ray start in "sphere space"
 	float r=sphere.w; // radius of sphere
@@ -75,7 +75,7 @@ bool ray_sphere_intersection(const vec4 sphere,vec3 Cworld,vec3 D,float max_t,in
 	hit.t=t;
 	hit.position = Cworld+t*D;
 	hit.normal = normalize(hit.position-sphere.xyz);
-	hit.uv=vec2(0.01,1.0-abs(hit.position.y-sphere.y)); // vertical axis colors
+	hit.uv=vec2(uvX,1.0-abs(hit.position.y-sphere.y)); // vertical axis colors
 	hit.alpha=hitFrac;
 	hit.shadow+=hitFrac;
 	return true;
@@ -135,9 +135,9 @@ bool ray_world_intersection(vec3 C,vec3 D, float max_t, bool firstZ, inout Hit h
 	vec3 moon2Orbit = 1.7*vec3(sin(phase2),0.3*sin(phase2),cos(phase2));
 	vec4 moon2Param = vec4(moon2Orbit,0.3);
 	if (ray_plane_intersection(C,D,max_t,hit)) if (firstZ) max_t=hit.t; 
-	if (ray_sphere_intersection(saturnParam,C,D,max_t,hit)) if (firstZ) max_t=hit.t; 
-	if (ray_sphere_intersection(moonParam,C,D,max_t,hit)) if (firstZ) max_t=hit.t; 
-	if (ray_sphere_intersection(moon2Param,C,D,max_t,hit)) if (firstZ) max_t=hit.t; 
+	if (ray_sphere_intersection(saturnParam,0.01,C,D,max_t,hit)) if (firstZ) max_t=hit.t; 
+	if (ray_sphere_intersection(moonParam,0.1,C,D,max_t,hit)) if (firstZ) max_t=hit.t; 
+	if (ray_sphere_intersection(moon2Param,0.2,C,D,max_t,hit)) if (firstZ) max_t=hit.t; 
 	return max_t<orig_max;
 }
 
@@ -199,7 +199,7 @@ void fragment()
 		if (color_along_ray(hit.position,D,hit,nextColor))
 		{
 			worldColor.rgb = mix(nextColor.rgb,worldColor.rgb,worldColor.a);
-			worldColor.a += nextColor.a;
+			worldColor.a += (1.0-worldColor.a)*nextColor.a;
 		}
 	}
 	
