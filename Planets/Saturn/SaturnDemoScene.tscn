@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://SpaceAssetsGodot/Planets/Saturn/saturn_rings_hubble.png" type="Texture" id=1]
+[ext_resource path="res://SpaceAssetsGodot/Examples/Rotation/KeyboardMouseLook.gd" type="Script" id=2]
+[ext_resource path="res://SpaceAssetsGodot/Planets/Saturn/SaturnRaytrace.gdshader" type="Shader" id=3]
+
+[sub_resource type="CubeMesh" id=12]
+size = Vector3( 6, 2, 6 )
+
+[sub_resource type="ShaderMaterial" id=13]
+shader = ExtResource( 3 )
+shader_param/lightDirection = Vector3( 0, 0.3, 1 )
+shader_param/ambientLight = 0.1
+shader_param/ringsTexture = ExtResource( 1 )
+
+[sub_resource type="ProceduralSky" id=9]
+
+[sub_resource type="Environment" id=10]
+background_mode = 1
+background_sky = SubResource( 9 )
+ambient_light_energy = 0.2
+
+[node name="Spatial" type="Spatial"]
+
+[node name="SaturnProxy" type="MeshInstance" parent="."]
+cast_shadow = 0
+mesh = SubResource( 12 )
+material/0 = SubResource( 13 )
+
+[node name="Sun Light" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, -8.15588, 13.4372, -1.08784 )
+shadow_enabled = true
+shadow_bias = 0.01
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 5 )
+near = 0.1
+far = 5000.0
+script = ExtResource( 2 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 10 )
