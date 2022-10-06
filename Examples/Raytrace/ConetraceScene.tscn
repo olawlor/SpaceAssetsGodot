@@ -2,7 +2,7 @@
 
 [ext_resource path="res://SpaceAssetsGodot/Examples/Rotation/KeyboardMouseLook.gd" type="Script" id=1]
 [ext_resource path="res://SpaceAssetsGodot/Ground/GroundTexture.gdshader" type="Shader" id=2]
-[ext_resource path="res://SpaceAssetsGodot/Utility/Raytrace/Conetrace0_hit_loop.gdshader" type="Shader" id=3]
+[ext_resource path="res://SpaceAssetsGodot/Examples/Raytrace/Conetrace0_hit_loop.gdshader" type="Shader" id=3]
 [ext_resource path="res://SpaceAssetsGodot/Ground/pebbles_loose_tiled.jpg" type="Texture" id=4]
 
 [sub_resource type="CubeMesh" id=12]

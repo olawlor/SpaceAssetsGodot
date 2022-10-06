@@ -2,7 +2,7 @@
 
 [ext_resource path="res://SpaceAssetsGodot/Examples/Rotation/KeyboardMouseLook.gd" type="Script" id=1]
 [ext_resource path="res://SpaceAssetsGodot/Ground/GroundTexture.gdshader" type="Shader" id=2]
-[ext_resource path="res://SpaceAssetsGodot/Utility/Raytrace/Raytrace5_soft_shadows.gdshader" type="Shader" id=3]
+[ext_resource path="res://SpaceAssetsGodot/Examples/Raytrace/Raytrace5_soft_shadows.gdshader" type="Shader" id=3]
 [ext_resource path="res://SpaceAssetsGodot/Ground/pebbles_loose_tiled.jpg" type="Texture" id=4]
 [ext_resource path="res://SpaceAssetsGodot/Planets/Saturn/saturn_rings_hubble.png" type="Texture" id=5]
 
