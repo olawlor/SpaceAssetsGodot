@@ -340,7 +340,7 @@ void fragment() {
 	
 	vec3 C=camera; // origin of ray (world coords)
 	vec3 D=world-camera; // direction of ray (world coords)
-	float cone_width=blur*2.0/768.0;
+	float cone_width=blur*1.0/768.0;
 	ray_t camera_ray=ray_t(C,D,0.0,cone_width);
 
 	ALBEDO.rgb=1.6*calc_world_color(camera_ray);
