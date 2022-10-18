@@ -1,9 +1,8 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://SpaceAssetsGodot/Examples/Rotation/KeyboardMouseLook.gd" type="Script" id=1]
-[ext_resource path="res://SpaceAssetsGodot/Ground/GroundTexture.gdshader" type="Shader" id=2]
+[ext_resource path="res://SpaceAssetsGodot/Ground/GroundBasic.tscn" type="PackedScene" id=2]
 [ext_resource path="res://SpaceAssetsGodot/Examples/Raytrace/Raytrace5_soft_shadows.gdshader" type="Shader" id=3]
-[ext_resource path="res://SpaceAssetsGodot/Ground/pebbles_loose_tiled.jpg" type="Texture" id=4]
 [ext_resource path="res://SpaceAssetsGodot/Planets/Saturn/saturn_rings_hubble.png" type="Texture" id=5]
 
 [sub_resource type="CubeMesh" id=12]
@@ -12,17 +11,6 @@ size = Vector3( 6, 2, 6 )
 [sub_resource type="ShaderMaterial" id=13]
 shader = ExtResource( 3 )
 shader_param/ringsTexture = ExtResource( 5 )
-
-[sub_resource type="PlaneMesh" id=4]
-size = Vector2( 100, 100 )
-subdivide_width = 20
-subdivide_depth = 20
-
-[sub_resource type="ShaderMaterial" id=11]
-shader = ExtResource( 2 )
-shader_param/waveRate = Vector3( 0.1, 0, 0.04 )
-shader_param/waveHeight = Vector3( 0, 0, 0 )
-shader_param/groundTexture = ExtResource( 4 )
 
 [sub_resource type="ProceduralSky" id=9]
 
@@ -62,15 +50,7 @@ cast_shadow = 0
 mesh = SubResource( 12 )
 material/0 = SubResource( 13 )
 
-[node name="Ground" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.001, 0 )
-visible = false
-cast_shadow = 0
-mesh = SubResource( 4 )
-material/0 = SubResource( 11 )
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="Ground" parent="." instance=ExtResource( 2 )]
 
 [node name="Sun Light" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, -8.15588, 13.4372, -1.08784 )
