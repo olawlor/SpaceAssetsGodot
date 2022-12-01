@@ -40,7 +40,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1238, 0 )
 material/0 = ExtResource( 2 )
 
 [node name="Outline" parent="LawlorHead" instance=ExtResource( 3 )]
-visible = false
 
 [node name="Orion_Lawlor_cap_100k" parent="LawlorHead/Outline" index="0"]
 material/0 = ExtResource( 1 )
