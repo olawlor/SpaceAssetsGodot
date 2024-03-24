@@ -1,9 +1,9 @@
 # Demonstration rotation using vectors
 # Dr. Orion Lawlor, lawlor@alaska.edu, 2022-09-06 (Public Domain)
-extends Spatial
+extends Node3D
 
 var t = 0 # Time since boot, in seconds
-export var angriness = 1 # amount of change
+@export var angriness = 1 # amount of change
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

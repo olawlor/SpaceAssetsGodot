@@ -1,135 +1,121 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=18 format=3 uid="uid://bvc2mq6k65nl"]
 
-[ext_resource path="res://SpaceAssetsGodot/Planets/Saturn/saturn_rings_hubble.png" type="Texture" id=1]
-[ext_resource path="res://SpaceAssetsGodot/Examples/Rotation/KeyboardMouseLook.gd" type="Script" id=2]
-[ext_resource path="res://SpaceAssetsGodot/Examples/Raytrace/Raytrace5_soft_shadows.gdshader" type="Shader" id=3]
-[ext_resource path="res://SpaceAssetsGodot/Ground/GroundTexture.gdshader" type="Shader" id=4]
-[ext_resource path="res://SpaceAssetsGodot/Ground/pebbles_loose_tiled.jpg" type="Texture" id=5]
-[ext_resource path="res://SpaceAssetsGodot/Examples/Reflection/DepthTexture.gdshader" type="Shader" id=6]
-[ext_resource path="res://SpaceAssetsGodot/Ground/GroundTextured.tres" type="Material" id=7]
+[ext_resource type="Texture2D" uid="uid://cuxuo1jwapijx" path="res://SpaceAssetsGodot/Planets/Saturn/saturn_rings_hubble.png" id="1"]
+[ext_resource type="Shader" path="res://SpaceAssetsGodot/Planets/Saturn/SaturnRaytrace.gdshader" id="1_hojga"]
+[ext_resource type="Script" path="res://SpaceAssetsGodot/Examples/Rotation/KeyboardMouseLook.gd" id="2"]
+[ext_resource type="Shader" path="res://SpaceAssetsGodot/Examples/Reflection/DepthTexture.gdshader" id="6"]
 
-[sub_resource type="CubeMesh" id=12]
-size = Vector3( 6, 2, 6 )
+[sub_resource type="BoxMesh" id="12"]
+size = Vector3(6, 2, 6)
 
-[sub_resource type="ShaderMaterial" id=13]
-shader = ExtResource( 3 )
-shader_param/ringsTexture = ExtResource( 1 )
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p7pm2"]
+render_priority = 0
+shader = ExtResource("1_hojga")
+shader_parameter/lightDirection = Vector3(0, 0.3, 1)
+shader_parameter/ambientLight = 0.1
+shader_parameter/ringsTexture = ExtResource("1")
 
-[sub_resource type="PlaneMesh" id=4]
-size = Vector2( 100, 100 )
+[sub_resource type="PlaneMesh" id="4"]
+size = Vector2(100, 100)
 subdivide_width = 20
 subdivide_depth = 20
 
-[sub_resource type="ShaderMaterial" id=11]
-shader = ExtResource( 4 )
-shader_param/waveRate = Vector3( 0.1, 0, 0.04 )
-shader_param/waveHeight = Vector3( 0, 0, 0 )
-shader_param/groundTexture = ExtResource( 5 )
+[sub_resource type="QuadMesh" id="22"]
+size = Vector2(1000, 1000)
+center_offset = Vector3(0, 0, -2)
 
-[sub_resource type="QuadMesh" id=22]
-size = Vector2( 1000, 1000 )
-center_offset = Vector3( 0, 0, -2 )
+[sub_resource type="Sky" id="9"]
 
-[sub_resource type="ProceduralSky" id=9]
-
-[sub_resource type="Environment" id=10]
+[sub_resource type="Environment" id="10"]
 background_mode = 1
-background_sky = SubResource( 9 )
+sky = SubResource("9")
 ambient_light_energy = 0.2
 
-[sub_resource type="SphereMesh" id=14]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k3de6"]
+metallic = 0.87
+metallic_specular = 0.86
+roughness = 0.2
+
+[sub_resource type="SphereMesh" id="14"]
+material = SubResource("StandardMaterial3D_k3de6")
 radial_segments = 32
 rings = 16
 
-[sub_resource type="SpatialMaterial" id=17]
-metallic = 1.0
-metallic_specular = 1.0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jqs5j"]
+metallic = 0.97
 roughness = 0.0
 
-[sub_resource type="SpatialMaterial" id=16]
-metallic = 1.0
-metallic_specular = 1.0
-roughness = 0.5
+[sub_resource type="CylinderMesh" id="18"]
 
-[sub_resource type="CylinderMesh" id=18]
-
-[sub_resource type="SpatialMaterial" id=19]
-albedo_color = Color( 0.207843, 0.207843, 0.207843, 1 )
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vp8kw"]
 emission_enabled = true
-emission = Color( 0.8, 0.12549, 0.12549, 1 )
-emission_energy = 1.0
-emission_operator = 0
-emission_on_uv2 = false
+emission = Color(0.396078, 0.533333, 0.984314, 1)
 
-[sub_resource type="QuadMesh" id=20]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4vchi"]
+render_priority = 0
+shader = ExtResource("6")
 
-[sub_resource type="ShaderMaterial" id=21]
-shader = ExtResource( 6 )
+[sub_resource type="QuadMesh" id="20"]
+material = SubResource("ShaderMaterial_4vchi")
 
-[node name="Spatial" type="Spatial"]
+[node name="Node3D" type="Node3D"]
 
-[node name="RaytraceProxy" type="MeshInstance" parent="."]
+[node name="RaytraceProxy" type="MeshInstance3D" parent="."]
 cast_shadow = 0
-mesh = SubResource( 12 )
-material/0 = SubResource( 13 )
+mesh = SubResource("12")
+surface_material_override/0 = SubResource("ShaderMaterial_p7pm2")
 
-[node name="Ground" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.001, 0 )
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.001, 0)
 visible = false
 cast_shadow = 0
-mesh = SubResource( 4 )
-material/0 = SubResource( 11 )
-__meta__ = {
-"_edit_lock_": true
-}
+mesh = SubResource("4")
 
-[node name="Sun Light" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, -8.15588, 13.4372, -1.08784 )
+[node name="Sun Light3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, -8.15588, 13.4372, -1.08784)
 shadow_enabled = true
 shadow_bias = 0.01
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 5 )
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 5)
 near = 0.1
 far = 5000.0
-script = ExtResource( 2 )
+script = ExtResource("2")
 
-[node name="GroundPlane" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
-mesh = SubResource( 22 )
-material/0 = ExtResource( 7 )
+[node name="GroundPlane" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("22")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 10 )
+environment = SubResource("10")
 
-[node name="FloatingArtifacts" type="Spatial" parent="."]
+[node name="FloatingArtifacts" type="Node3D" parent="."]
 
-[node name="PolygonSphere" type="MeshInstance" parent="FloatingArtifacts"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.45538, 0, 0 )
-mesh = SubResource( 14 )
+[node name="PolygonSphere" type="MeshInstance3D" parent="FloatingArtifacts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.45538, 0, 0)
+mesh = SubResource("14")
 skeleton = NodePath("../..")
-material/0 = SubResource( 17 )
+surface_material_override/0 = SubResource("StandardMaterial3D_jqs5j")
 
-[node name="PolygonSphere2" type="MeshInstance" parent="FloatingArtifacts"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.45538, 2.22224, 0 )
-mesh = SubResource( 14 )
+[node name="PolygonSphere2" type="MeshInstance3D" parent="FloatingArtifacts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.45538, 2.22224, 0)
+mesh = SubResource("14")
 skeleton = NodePath("../..")
-material/0 = SubResource( 16 )
 
 [node name="ReflectionProbe" type="ReflectionProbe" parent="FloatingArtifacts"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.41953, 0.427286, 0.0744449 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.41953, 0.427286, 0.0744449)
 update_mode = 1
 max_distance = 37.2
-extents = Vector3( 8, 8, 8 )
-origin_offset = Vector3( -0.0214844, 0, 0 )
+size = Vector3(16, 16, 16)
+origin_offset = Vector3(-0.0214844, 0, 0)
 
-[node name="GlowRed" type="MeshInstance" parent="FloatingArtifacts"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7051, -0.00430441, 0.00112891 )
-mesh = SubResource( 18 )
+[node name="GlowRed" type="MeshInstance3D" parent="FloatingArtifacts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7051, -0.00430441, 0.00112891)
+mesh = SubResource("18")
 skeleton = NodePath("../..")
-material/0 = SubResource( 19 )
+surface_material_override/0 = SubResource("StandardMaterial3D_vp8kw")
 
-[node name="Postprocess" type="MeshInstance" parent="."]
-transform = Transform( 3.38226, 0, 0, 0, 3.38226, 0, 0, 0, 3.38226, -4.21665, 0, 3.26272 )
-mesh = SubResource( 20 )
-material/0 = SubResource( 21 )
+[node name="Postprocess" type="MeshInstance3D" parent="."]
+transform = Transform3D(3.38226, 0, 0, 0, 3.38226, 0, 0, 0, 3.38226, -4.21665, 0, 3.26272)
+gi_mode = 0
+mesh = SubResource("20")

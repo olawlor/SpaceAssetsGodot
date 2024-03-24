@@ -7,7 +7,7 @@ render_mode unshaded;
 render_mode cull_front;
 
 uniform float outline_thick=0.001;
-uniform vec4 outline_color  : hint_color =vec4(0.0);
+uniform vec4 outline_color  : source_color =vec4(0.0);
 uniform float outline_black=0.8;
 
 void vertex() {

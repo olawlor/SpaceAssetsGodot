@@ -1,6 +1,6 @@
 # Demonstration keyboard-driven rotation using coordinate vectors
 # Dr. Orion Lawlor, lawlor@alaska.edu, 2022-09-06 (Public Domain)
-extends Spatial
+extends Node3D
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

@@ -335,8 +335,8 @@ vec3 calc_world_color(ray_t ray) {
 }
 
 void fragment() {
-	vec3 world=(CAMERA_MATRIX * vec4(VERTEX, 1.0)).xyz;
-	vec3 camera=CAMERA_MATRIX[3].xyz;
+	vec3 world=(INV_VIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	vec3 camera=INV_VIEW_MATRIX[3].xyz;
 	
 	vec3 C=camera; // origin of ray (world coords)
 	vec3 D=world-camera; // direction of ray (world coords)

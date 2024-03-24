@@ -1,6 +1,6 @@
 # Demonstration keyboard-driven rotation using quaternions
 # Dr. Orion Lawlor, lawlor@alaska.edu, 2022-09-06 (Public Domain)
-extends Spatial
+extends Node3D
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -22,8 +22,8 @@ func _process(delta):
 		rot.y=-speed
 	
 	# Get our current rotation as a quaternion
-	var cur : Quat=transform.basis.get_rotation_quat()
-	var qrot = Quat(rot) # convert rotation to quaternion
+	var cur : Quaternion=transform.basis.get_rotation_quaternion()
+	var qrot = Quaternion(rot) # convert rotation to quaternion
 	# cur = qrot*cur  # apply rotation in world space
 	cur = cur*qrot  # apply rotation in local space
 	transform.basis=Basis(cur) # write back to object

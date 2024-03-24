@@ -15,7 +15,7 @@ void fragment() {
 	vec3 vertex_color = pow(COLOR.rgb,vec3(0.5)); //<- fix up gamma on colors
 	vec3 lighting = vec3(1.0);
 	
-	if (dot(world_normal,light_dir)<0.0) lighting=vec3(0.7); // in shadow
+	if (dot(world_normal,light_dir)<0.0) lighting=vec3(0.5); // in shadow
 	
 	ALBEDO=lighting * vertex_color;
 }

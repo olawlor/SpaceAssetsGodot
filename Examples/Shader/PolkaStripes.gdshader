@@ -10,7 +10,7 @@ void vertex()
 
 uniform float polkaScale=4.0; 
 uniform float stripeRepeats=5.0; // stripes per meter
-uniform vec4 stripeColor : hint_color;
+uniform vec4 stripeColor : source_color;
 uniform sampler2D stripeTexture;
 void fragment()
 {

@@ -7,7 +7,7 @@
 shader_type spatial;
 render_mode unshaded;
 
-uniform sampler2D viewport; // our viewport texture
+uniform sampler2D viewport : source_color; // our viewport texture
 
 // Read the viewport at this UV tex coordinate,
 //   leaving center unchanged, and with this scaling.
@@ -28,7 +28,7 @@ void fragment()
 	vec3 color=vec3(0.0); // resulting color
 		
 	color += vec3(1.0,1.0,0.9)*readIFS(uv,vec2(0.0,1.0),2.0); // bottom left
-	color += vec3(1.0,0.9,1.0)*readIFS(uv,vec2(1.0,1.0),2.0); // bottom right
+	color += vec3(0.1,0,0) + vec3(1.0,0.9,1.0)*readIFS(uv,vec2(1.0,1.0),2.0); // bottom right
 	color += vec3(0.9,1.0,1.0)*readIFS(uv,vec2(0.5,0.0),2.0); // top
 	
 	color = color * 0.98 + 0.01; // exposure adjustment

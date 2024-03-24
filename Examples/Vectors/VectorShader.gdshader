@@ -28,7 +28,7 @@ void vertex()
 	
 	// Write my XYZ out to the direction for our vertex data
 	vec3 myDir = vec3(0,0,0);
-	vec3 myOrigin = WORLD_MATRIX[3].xyz; 
+	vec3 myOrigin = MODEL_MATRIX[3].xyz; 
 	if (axis.x>0.99) {myDir=myR;} // R/X axis
 	if (axis.y>0.99) {myDir=myG;} // G/Y axis
 	if (axis.z>0.99) {myDir=myB;} // B/Z axis
@@ -38,7 +38,7 @@ void vertex()
 	NORMAL=point_at(NORMAL,myDir);
 	
 	// Project our world coordinates onscreen:
-	POSITION=PROJECTION_MATRIX*INV_CAMERA_MATRIX*vec4(world,1.0);
+	POSITION=PROJECTION_MATRIX*VIEW_MATRIX*vec4(world,1.0);
 }
 
 void fragment()

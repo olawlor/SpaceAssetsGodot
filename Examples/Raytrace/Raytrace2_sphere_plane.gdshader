@@ -66,8 +66,8 @@ float ray_plane_intersection(vec3 C,vec3 D)
 void fragment()
 {
 
-	vec3 world=(CAMERA_MATRIX * vec4(VERTEX, 1.0)).xyz;
-	vec3 camera=CAMERA_MATRIX[3].xyz;
+	vec3 world=(INV_VIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	vec3 camera=INV_VIEW_MATRIX[3].xyz;
 	vec3 C = camera, D = world-camera; // L = C + t *D
 	
 	float tSphere = ray_sphere_intersection(C,D);
@@ -90,6 +90,6 @@ void fragment()
 	vec3 halfway = normalize(0.5*toCamera+0.5*toLight);
 	if (dot(halfway,worldNormal)>0.98) light=10.0;
 	
-	NORMAL = (INV_CAMERA_MATRIX*vec4(worldNormal,0.0)).xyz;
+	NORMAL = (VIEW_MATRIX*vec4(worldNormal,0.0)).xyz;
 	ALBEDO = vec3(light);
 }

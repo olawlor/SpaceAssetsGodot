@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 var mouse_current : Vector2
 var mouse_buttons = 0
@@ -22,7 +22,7 @@ func _input(event):
 			print("event xy ",mouse_current,"    buttons ",mouse_buttons)
 	if event is InputEventKey:
 		if (event.pressed):
-			print(" keydown ",event.unicode,"  code ",event.scancode)
+			print(" keydown ",event.unicode,"  code ",event.keycode)
 		else:
-			print(" keyup ",event.unicode,"  code ",event.scancode)
+			print(" keyup ",event.unicode,"  code ",event.keycode)
 	pass

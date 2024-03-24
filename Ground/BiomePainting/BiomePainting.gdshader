@@ -24,7 +24,7 @@ void fragment()
 	normal = normal*2.0-1.0; // convert color 0..1 to coordinate -1..+1
 	normal.xy *= 0.5; // tone down the slopes
 	normal = vec3(normal.x,normal.z,-normal.y); //<- swizzle to swap Z-up to Y-up
-	NORMAL = (INV_CAMERA_MATRIX*vec4(normal,0.0)).xyz; // world to view coords
+	NORMAL = (VIEW_MATRIX*vec4(normal,0.0)).xyz; // world to view coords
 	
 	// red: rock (bare gravel), green: trees (vegetation), blue: 
 	vec3 biome = texture(biomeTexture,groundTC).rgb;

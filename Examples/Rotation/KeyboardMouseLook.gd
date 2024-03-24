@@ -1,6 +1,6 @@
 # Demonstration WASD motion and mouse look
 # Dr. Orion Lawlor, lawlor@alaska.edu, 2022-09-08 (Public Domain)
-extends Spatial
+extends Node3D
 
 var last_pos = Vector2(-1,-1) # pixels where mouse last seen
 
@@ -17,7 +17,7 @@ func _process(delta):
 	if (last_pos.x==-1):
 		dpos = Vector2(0,0)
 	last_pos = cur_pos
-	if Input.is_mouse_button_pressed(2): # right click
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT): # right click
 		rot.y += -mouse_speed * dpos.x;
 		rot.x += -mouse_speed * dpos.y;
 	

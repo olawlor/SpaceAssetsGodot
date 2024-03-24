@@ -10,8 +10,8 @@ varying vec3 camera; // XYZ world-coordinates camera position
 
 void vertex() 
 {
-	world = (WORLD_MATRIX*vec4(VERTEX,1.0)).xyz;
-	camera = CAMERA_MATRIX[3].xyz;
+	world = (MODEL_MATRIX*vec4(VERTEX,1.0)).xyz;
+	camera = INV_VIEW_MATRIX[3].xyz;
 }
 
 void fragment()
@@ -37,9 +37,9 @@ void fragment()
 	ALBEDO = vec3(0.9); // flat color
 	ALBEDO = 0.8*fract(worldHit*4.0); // plaid colors
 	
-	vec4 clip = PROJECTION_MATRIX * INV_CAMERA_MATRIX*vec4(worldHit,1.0);
+	vec4 clip = PROJECTION_MATRIX * VIEW_MATRIX*vec4(worldHit,1.0);
 	DEPTH = (clip.z/clip.w) * .5f + .5f;  // write our depth (needs GLES 3, sadly)
-	NORMAL = (INV_CAMERA_MATRIX*vec4(worldNormal,0.0)).xyz; // Godot wants normal in camera coords
+	NORMAL = (VIEW_MATRIX*vec4(worldNormal,0.0)).xyz; // Godot wants normal in camera coords
 	
 	// Lighting
 	vec3 toLight=normalize(vec3(0,1,1)); // 45 degree angle

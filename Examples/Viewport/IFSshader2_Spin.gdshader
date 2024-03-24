@@ -8,7 +8,7 @@
 shader_type spatial;
 render_mode unshaded;
 
-uniform sampler2D viewport; // our viewport texture
+uniform sampler2D viewport : source_color; // our viewport texture
 
 // Read the viewport at this UV tex coordinate,
 //   leaving center unchanged, and with this scaling.

@@ -3,7 +3,7 @@
 [ext_resource path="res://SpaceAssetsGodot/Examples/Vectors/VectorShader.gdshader" type="Shader" id=1]
 [ext_resource path="res://SpaceAssetsGodot/Examples/Rotation/KeyboardMouseLook.gd" type="Script" id=2]
 [ext_resource path="res://SpaceAssetsGodot/Utility/Axes3DX.gltf" type="PackedScene" id=3]
-[ext_resource path="res://SpaceAssetsGodot/Ground/pebbles_loose_tiled.jpg" type="Texture" id=6]
+[ext_resource path="res://SpaceAssetsGodot/Ground/pebbles_loose_tiled.jpg" type="Texture2D" id=6]
 [ext_resource path="res://SpaceAssetsGodot/Ground/GroundTexture.gdshader" type="Shader" id=7]
 
 [sub_resource type="SphereMesh" id=6]
@@ -15,11 +15,11 @@ subdivide_depth = 20
 
 [sub_resource type="ShaderMaterial" id=11]
 shader = ExtResource( 7 )
-shader_param/waveRate = Vector3( 0.1, 0, 0.04 )
-shader_param/waveHeight = Vector3( 0, 0, 0 )
-shader_param/groundTexture = ExtResource( 6 )
+shader_parameter/waveRate = Vector3( 0.1, 0, 0.04 )
+shader_parameter/waveHeight = Vector3( 0, 0, 0 )
+shader_parameter/groundTexture = ExtResource( 6 )
 
-[sub_resource type="ProceduralSky" id=9]
+[sub_resource type="Sky" id=9]
 
 [sub_resource type="Environment" id=10]
 background_mode = 2
@@ -28,28 +28,28 @@ ambient_light_energy = 0.2
 
 [sub_resource type="ShaderMaterial" id=12]
 shader = ExtResource( 1 )
-shader_param/axis = Plane( 1, 0, 0, 0 )
+shader_parameter/axis = Plane( 1, 0, 0, 0 )
 
 [sub_resource type="ShaderMaterial" id=13]
 shader = ExtResource( 1 )
-shader_param/axis = Plane( 0, 1, 0, 0 )
+shader_parameter/axis = Plane( 0, 1, 0, 0 )
 
 [sub_resource type="ShaderMaterial" id=14]
 shader = ExtResource( 1 )
-shader_param/axis = Plane( 0, 0, 1, 0 )
+shader_parameter/axis = Plane( 0, 0, 1, 0 )
 
 [sub_resource type="ShaderMaterial" id=15]
 shader = ExtResource( 1 )
-shader_param/axis = Plane( 0.5, 0.5, 0.5, 1 )
+shader_parameter/axis = Plane( 0.5, 0.5, 0.5, 1 )
 
-[node name="Spatial" type="Spatial"]
+[node name="Node3D" type="Node3D"]
 
-[node name="Sphere" type="MeshInstance" parent="."]
-transform = Transform( 0.805928, -0.232782, 0.544327, 0, 0.919451, 0.393204, -0.592013, -0.316894, 0.741012, -0.639933, -0.296525, -3.28152 )
+[node name="Sphere" type="MeshInstance3D" parent="."]
+transform = Transform3D( 0.805928, -0.232782, 0.544327, 0, 0.919451, 0.393204, -0.592013, -0.316894, 0.741012, -0.639933, -0.296525, -3.28152 )
 mesh = SubResource( 6 )
 
-[node name="Ground" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 cast_shadow = 0
 mesh = SubResource( 4 )
 material/0 = SubResource( 11 )
@@ -57,14 +57,14 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Sun Light" type="DirectionalLight" parent="."]
-transform = Transform( 0.980659, -0.145876, -0.130492, 0.184019, 0.914292, 0.360841, 0.0666703, -0.377875, 0.923453, -8.28647, 13.3813, -1.03848 )
+[node name="Sun Light3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D( 0.980659, -0.145876, -0.130492, 0.184019, 0.914292, 0.360841, 0.0666703, -0.377875, 0.923453, -8.28647, 13.3813, -1.03848 )
 light_energy = 1.5
 shadow_enabled = true
 shadow_bias = 0.01
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 5 )
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 5 )
 near = 0.1
 far = 5000.0
 script = ExtResource( 2 )

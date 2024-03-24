@@ -13,8 +13,8 @@ void vertex()
 void fragment()
 {
 
-	vec3 world=(CAMERA_MATRIX * vec4(VERTEX, 1.0)).xyz;
-	vec3 camera=CAMERA_MATRIX[3].xyz;
+	vec3 world=(INV_VIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	vec3 camera=INV_VIEW_MATRIX[3].xyz;
 	vec3 C = camera, D = world-camera; // L = C + t *D
 	vec3 N = vec3(sin(TIME*0.5),1,0);
 	/*
@@ -37,7 +37,7 @@ void fragment()
 	vec3 worldHit = C + t * D;
 	if (length(worldHit)>1.0) discard;
 	vec3 worldNormal = N; 
-	NORMAL = (INV_CAMERA_MATRIX*vec4(worldNormal,0.0)).xyz;
+	NORMAL = (VIEW_MATRIX*vec4(worldNormal,0.0)).xyz;
 	ALBEDO = vec3(fract(worldHit*4.0));
 	ALBEDO.g=0.0; //<- roundoff
 }

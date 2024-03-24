@@ -1,46 +1,42 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://disdr8dcb2e57"]
 
-[ext_resource path="res://SpaceAssetsGodot/Utility/Axes3D.gltf" type="PackedScene" id=1]
+[ext_resource type="PackedScene" uid="uid://wvo0iv1cplrq" path="res://SpaceAssetsGodot/Utility/Axes3D.gltf" id="1"]
 
-[sub_resource type="CylinderMesh" id=1]
+[sub_resource type="CylinderMesh" id="1"]
 
-[sub_resource type="PrismMesh" id=2]
+[sub_resource type="PrismMesh" id="2"]
 
-[sub_resource type="SpatialMaterial" id=7]
-albedo_color = Color( 0.247059, 0.541176, 0.231373, 1 )
+[sub_resource type="CylinderMesh" id="6"]
 
-[sub_resource type="CylinderMesh" id=6]
+[node name="MouseHouse" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.08306, 0, -0.175205)
 
-[node name="MouseHouse" type="Spatial"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.08306, 0, -0.175205 )
+[node name="House" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1, 0)
+mesh = SubResource("1")
 
-[node name="House" type="MeshInstance" parent="."]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1, 0 )
-mesh = SubResource( 1 )
-
-[node name="Roof" type="MeshInstance" parent="."]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 3, 0 )
-mesh = SubResource( 2 )
+[node name="Roof" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 3, 0)
+mesh = SubResource("2")
 skeleton = NodePath("../House")
-material/0 = SubResource( 7 )
 
-[node name="Axes3D2" parent="Roof" instance=ExtResource( 1 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -2 )
+[node name="Axes3D2" parent="Roof" instance=ExtResource("1")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -2)
 
-[node name="LightTop" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+[node name="LightTop" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 
-[node name="OmniLight" type="OmniLight" parent="LightTop"]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.198158, 0 )
+[node name="OmniLight3D" type="OmniLight3D" parent="LightTop"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.198158, 0)
 light_energy = 0.3
 light_indirect_energy = 0.1
 shadow_enabled = true
 omni_range = 10.0
 
-[node name="Light Cap" type="MeshInstance" parent="LightTop"]
-transform = Transform( -2.18557e-08, 0, -0.5, 0, 0.1, 0, 0.5, 0, -2.18557e-08, 0, 0.5, 0 )
-mesh = SubResource( 6 )
+[node name="Light3D Cap" type="MeshInstance3D" parent="LightTop"]
+transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.1, 0, 0.5, 0, -2.18557e-08, 0, 0.5, 0)
+mesh = SubResource("6")
 skeleton = NodePath("../../Roof")
 
-[node name="Axes3D" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
+[node name="Axes3D" parent="." instance=ExtResource("1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)

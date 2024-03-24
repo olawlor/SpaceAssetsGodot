@@ -171,8 +171,8 @@ bool color_along_ray(vec3 C,vec3 D,inout Hit hit,out vec4 color)
 void fragment()
 {
 
-	vec3 world=(CAMERA_MATRIX * vec4(VERTEX, 1.0)).xyz;
-	vec3 camera=CAMERA_MATRIX[3].xyz;
+	vec3 world=(INV_VIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	vec3 camera=INV_VIEW_MATRIX[3].xyz;
 	vec3 C = camera, D = world-camera; // L = C + t *D
 	
 	Hit hit;

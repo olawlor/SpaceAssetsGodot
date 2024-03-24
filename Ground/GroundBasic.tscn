@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://SpaceAssetsGodot/Ground/GroundTexture.gdshader" type="Shader" id=1]
-[ext_resource path="res://SpaceAssetsGodot/Ground/pebbles_loose_tiled.jpg" type="Texture" id=2]
+[ext_resource path="res://SpaceAssetsGodot/Ground/pebbles_loose_tiled.jpg" type="Texture2D" id=2]
 
 [sub_resource type="PlaneMesh" id=4]
 size = Vector2( 100, 100 )
@@ -10,12 +10,12 @@ subdivide_depth = 20
 
 [sub_resource type="ShaderMaterial" id=11]
 shader = ExtResource( 1 )
-shader_param/waveRate = Vector3( 0.1, 0, 0.04 )
-shader_param/waveHeight = Vector3( 0, 0, 0 )
-shader_param/groundTexture = ExtResource( 2 )
+shader_parameter/waveRate = Vector3( 0.1, 0, 0.04 )
+shader_parameter/waveHeight = Vector3( 0, 0, 0 )
+shader_parameter/groundTexture = ExtResource( 2 )
 
-[node name="Ground" type="MeshInstance"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.001, 0 )
+[node name="Ground" type="MeshInstance3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.001, 0 )
 cast_shadow = 0
 mesh = SubResource( 4 )
 material/0 = SubResource( 11 )
